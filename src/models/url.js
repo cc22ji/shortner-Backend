@@ -17,6 +17,7 @@ const referenceSchema = new mongoose.Schema({
     ]
 },{timestamps:true})
 
+//assing one schema to other for proper managing data
 const schema = new mongoose.Schema({
     reference_id : {type : String},
     urls : {

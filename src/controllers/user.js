@@ -5,8 +5,6 @@ const ErrorHandler = require("../utils/utility-class.js");
 const jwt = require("jsonwebtoken")
 
 
-const redirect_url = process.env.REDIRECT_URL;
-
 // user Registration controller
 const newUserRegistration = TryCatch(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -55,8 +53,7 @@ const userLogin = TryCatch(async(req,res,next)=>{
                         sameSite: 'None',
                         secure: true,
                       })
-                      return res.send({"status":"success", "message":" temprory Login Success"})
-                      // .redirect("http://localhost:3000/home")
+                      return res.send({"status":"success", "message":"Login Success"})
             }else{
                 return next(new ErrorHandler("Email or password is wrong",500))
             }
@@ -67,6 +64,15 @@ const userLogin = TryCatch(async(req,res,next)=>{
         return next(new ErrorHandler("All Fields are required",500))
     }
 })
+
+const Authentication = TryCatch(async(req,res,next)=>{
+  const userInfo = req.user
+  if(userInfo){
+    res.status(200).send({"authorized" : true , info : userInfo})
+  }else{
+    return next(new ErrorHandler("Unauthorised user",500))
+  }
+})
     
 
-module.exports = { newUserRegistration, userLogin };
+module.exports = { newUserRegistration, userLogin, Authentication };

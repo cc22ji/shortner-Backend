@@ -13,7 +13,6 @@ const Originurl = process.env.ORIGIN_URL
 
 
 //use cors
-// app.use(cors())
 const corsOptions = {
     origin: Originurl,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -23,26 +22,29 @@ const corsOptions = {
   
   app.use(cors(corsOptions));
 
-
+//use json middleware
 app.use(express.json());
 
+//use encoded middleware 
 app.use(express.urlencoded({ extended: true }));
 
 //use cookie parser
 app.use(cookieParser());
 
-
+// connection from DataBase
 dbConnect();
 
-// login, singup public routes
+// User routes
 app.use('/api/v1/user',users)
 
-// protected routes
+// Url's routes
 app.use('/api/v1',url)
 
 
-
+//custom Error Handler middleware
 app.use(errorMiddleware)
 
-
-app.listen(port,()=>{console.log(`server is listening on port ${port}`)})
+//port
+app.listen(port,()=>{
+  // console.log(`server is listening on port ${port}`)
+})

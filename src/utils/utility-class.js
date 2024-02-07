@@ -1,5 +1,5 @@
 
-
+// create to add status code in default Error
 class ErrorHandler extends Error {
     constructor(message, statusCode) {
         super(message);

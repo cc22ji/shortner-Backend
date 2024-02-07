@@ -1,15 +1,12 @@
 
-// const {nanoid} = require('nanoid');
 const { TryCatch } = require("../middlewares/error");
 const ErrorHandler = require("../utils/utility-class.js");
-const user = require('../models/url.js')
 const shortid = require('shortid');
 const URL = require('../models/url')
 
 
 const GenerateURL = TryCatch(async(req, res,next)=> {
   const body = req.body;
-  console.log("enter",body)
  
  if(!body.url){
   
@@ -59,11 +56,7 @@ const Redirect = TryCatch(async(req, res,next) => {
         
        
         res.redirect(matchedUrl.redirectURL);
-        
-       //http://localhost:4000/api/v1/rQJWP2Gmn
     } else {
-        // If no entry found, handle accordingly
-        // res.status(404).send("Short URL not found");
         return next(new ErrorHandler("Short URL not found",404))
     }
     
@@ -90,7 +83,7 @@ const Analytics = TryCatch(async (req, res, next) => {
       });
   
       // Return all analytics data
-      return res.json(analyticsData);
+      return res.json({ user: req.user, analytics: analyticsData });
    
   });
 
