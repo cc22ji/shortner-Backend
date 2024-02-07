@@ -50,11 +50,12 @@ const userLogin = TryCatch(async(req,res,next)=>{
                 const token = jwt.sign({userID : user._id},
                     process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
                    
-                    // return res.send({"status":"success", "message":" temprory Login Success","token":token})
-                  return res.cookie("token",token, {
+                    // 
+                  res.cookie("token",token, {
                         sameSite: 'None',
                         secure: true,
                       })
+                      return res.send({"status":"success", "message":" temprory Login Success"})
                       // .redirect("http://localhost:3000/home")
             }else{
                 return next(new ErrorHandler("Email or password is wrong",500))

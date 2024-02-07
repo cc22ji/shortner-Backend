@@ -7,15 +7,21 @@ const ErrorHandler = require("../utils/utility-class.js");
 
 var authorization = TryCatch(async(req,res,next)=>{
     let token = req.cookies.token
-    console.log("auth-middleware",token)
+    console.log("auth-middleware enter")
     if(!token){
+      console.log("fail")
        return new ErrorHandler("Unauthorized User", 401)
+       
     }
+    console.log("auth-middlewa 22")
       //verify token
             const {userID} = jwt.verify(token,process.env.JWT_SECRET_KEY)
             //Get user from Token
             req.user = await UserModel.findById(userID).select("-password")
-            next()
+            next();
+            console.log("successs")
+            
+            
     
     //for postman check 
 
