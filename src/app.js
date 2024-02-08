@@ -40,7 +40,6 @@ app.use('/api/v1/user',users)
 // Url's routes
 app.use('/api/v1',url)
 
-
 //custom Error Handler middleware
 app.use(errorMiddleware)
 
