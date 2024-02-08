@@ -8,8 +8,8 @@ const {errorMiddleware} = require("./middlewares/error")
 const cors = require("cors")
 const cookieParser = require("cookie-parser");
 
-const port = process.env.PORT
-const Originurl = process.env.ORIGIN_URL
+const port = process.env.PORT || 4000
+const Originurl = process.env.ORIGIN_URL || 'http://localhost:3000'
 
 
 //use cors

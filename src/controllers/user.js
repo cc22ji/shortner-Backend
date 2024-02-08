@@ -4,6 +4,7 @@ const { TryCatch } = require("../middlewares/error");
 const ErrorHandler = require("../utils/utility-class.js");
 const jwt = require("jsonwebtoken")
 
+const key =  process.env.JWT_SECRET_KEY || "abcd"
 
 // user Registration controller
 const newUserRegistration = TryCatch(async (req, res, next) => {
@@ -46,7 +47,7 @@ const userLogin = TryCatch(async(req,res,next)=>{
                 
                 //Generate Token
                 const token = jwt.sign({userID : user._id},
-                    process.env.JWT_SECRET_KEY,{expiresIn:"1d"})
+                    key,{expiresIn:"1d"})
                    
                     // 
                   res.cookie("token",token, {
