@@ -7,7 +7,6 @@ const URL = require('../models/url')
 
 const GenerateURL = TryCatch(async(req, res,next)=> {
   const body = req.body;
- 
  if(!body.url){
   
   return next(new ErrorHandler("Enter long link",500))
@@ -70,7 +69,7 @@ const Analytics = TryCatch(async (req, res, next) => {
 
       if (!results) {
         // If no URLs are found for the user, return appropriate message
-        return next(new ErrorHandler("No URLs found for the user",404))
+        return res.status(404).json({ user: req.user, message : "No URLs found for the user" });
       }
       // Collect analytics data for each URL
       const analyticsData = results.urls.map(urlDoc => {

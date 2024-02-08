@@ -7,6 +7,7 @@ const ErrorHandler = require("../utils/utility-class.js");
 
 var authorization = TryCatch(async(req,res,next)=>{
     let token = req.cookies.token
+    
     if(!token){
        return new ErrorHandler("Unauthorized User", 401)
     }
